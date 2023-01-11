@@ -1,4 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "../../axios";
+
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
+  const { data } = await axios.get("/posts");
+  return data;
+});
 
 const initialState = {
   posts: {
@@ -14,8 +20,22 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducer: {},
-});
+  reducers: {},
+  extraReducers:(builder) => {
+    builder.addCase(fetchPosts.pending, (state) => {
+      state.posts.items = [];
+      state.posts.status = "loading";
+    })
+    builder.addCase(fetchPosts.fulfilled, (state, action) => {
+      state.posts.items = action.payload;
+      state.posts.status = "success";
+    })
+    builder.addCase(fetchPosts.rejected, (state) => {
+      state.posts.items = [];
+      state.posts.status = "error";
+    })
+  },
+})
 
 export const selectPosts = (state) => state.posts;
 
