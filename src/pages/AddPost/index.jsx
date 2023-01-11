@@ -51,7 +51,7 @@ export const AddPost = () => {
         title,
         text,
         imageUrl: baseURL + imageUrl,
-        tags: tags.split(delimiters),
+        tags: tags.split(delimiters).filter(tag => tag !== ""),
       };
       const { data } = await axios.post("/posts", fields);
       const { _id } = data;
