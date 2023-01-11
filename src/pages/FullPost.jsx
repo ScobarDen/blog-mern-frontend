@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Post } from "../components/Post";
-import { Index } from "../components/AddComment";
-import { CommentsBlock } from "../components/CommentsBlock";
+import { Post, AddComment, CommentsBlock } from "../components";
+import { useParams } from "react-router-dom";
+import axios from "../axios";
 
 export const FullPost = () => {
+  const [dataPost, setDataPost] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
+
+  useEffect(() => {
+      setIsLoading(true);
+    axios
+      .get(`/posts/${id}`)
+      .then(({ data }) => {
+        setDataPost(data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }, []);
+
+  if (isLoading) {
+      return <Post isLoading={true}/>
+  }
+
   return (
     <>
       <Post
-        id={1}
+        id={id}
         title="Roast the code #1 | Rock Paper Scissors"
         imageUrl="https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png"
         user={{
@@ -49,7 +70,7 @@ export const FullPost = () => {
         ]}
         isLoading={false}
       >
-        <Index />
+        <AddComment />
       </CommentsBlock>
     </>
   );
