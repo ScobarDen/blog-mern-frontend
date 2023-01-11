@@ -34,7 +34,7 @@ export const Home = () => {
       <Grid container spacing={4}>
         <Grid xs={8} item>
           {(isLoadingPosts ? [...Array(5)] : postsItems).map(
-            (post) => isLoadingPosts ? <PostSkeleton/> : (
+            (post, index) => isLoadingPosts ? <PostSkeleton key={index}/> : (
               <Post
                 key={post._id}
                 id={post._id}
