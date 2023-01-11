@@ -7,18 +7,20 @@ import { Post } from "../components";
 import { TagsBlock } from "../components";
 import { CommentsBlock } from "../components";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts, selectPosts } from "../redux/slices/posts";
-import {PostSkeleton} from "../components/Post/Skeleton";
+import { fetchPosts, fetchTags, selectPosts } from "../redux/slices/posts";
+import { PostSkeleton } from "../components/Post/Skeleton";
 
 export const Home = () => {
   const dispatch = useDispatch();
   const {
     posts: { items: postsItems, status: postsStatus },
-    tags,
+    tags: { items: tagsItems, status: tagsStatus },
   } = useSelector(selectPosts);
-  const isLoadingPosts = postsStatus === 'loading';
+  const isLoadingPosts = postsStatus === "loading";
+  const isLoadingTags = tagsStatus === "loading";
   useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchTags());
   }, []);
 
   return (
@@ -33,8 +35,10 @@ export const Home = () => {
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
-          {(isLoadingPosts ? [...Array(5)] : postsItems).map(
-            (post, index) => isLoadingPosts ? <PostSkeleton key={index}/> : (
+          {(isLoadingPosts ? [...Array(5)] : postsItems).map((post, index) =>
+            isLoadingPosts ? (
+              <PostSkeleton key={index} />
+            ) : (
               <Post
                 key={post._id}
                 id={post._id}
@@ -58,10 +62,7 @@ export const Home = () => {
           )}
         </Grid>
         <Grid xs={4} item>
-          <TagsBlock
-            items={["react", "typescript", "заметки"]}
-            isLoading={false}
-          />
+          <TagsBlock items={tagsItems} isLoading={isLoadingTags} />
           <CommentsBlock
             items={[
               {
