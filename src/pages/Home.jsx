@@ -8,7 +8,7 @@ import { TagsBlock } from "../components";
 import { CommentsBlock } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, fetchTags, selectPosts } from "../redux/slices/posts";
-import { PostSkeleton } from "../components/Post/Skeleton";
+import { selectAuth } from "../redux/slices/auth";
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,7 @@ export const Home = () => {
     posts: { items: postsItems, status: postsStatus },
     tags: { items: tagsItems, status: tagsStatus },
   } = useSelector(selectPosts);
+  const { data } = useSelector(selectAuth);
   const isLoadingPosts = postsStatus === "loading";
   const isLoadingTags = tagsStatus === "loading";
   useEffect(() => {
@@ -56,7 +57,7 @@ export const Home = () => {
                 viewsCount={post.viewsCount}
                 commentsCount={3} // todo: Сделать комменты
                 tags={post.tags}
-                isEditable
+                isEditable={data?._id === post.user._id}
               />
             )
           )}
