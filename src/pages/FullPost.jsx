@@ -29,7 +29,7 @@ export const FullPost = () => {
   return (
     <>
       <Post
-        id={id}
+        _id={id}
         title="Roast the code #1 | Rock Paper Scissors"
         imageUrl="https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png"
         user={{
@@ -42,6 +42,22 @@ export const FullPost = () => {
         commentsCount={3}
         tags={["react", "fun", "typescript"]}
         isFullPost
+        // _id={dataPost._id}
+        // title={dataPost.title}
+        // imageUrl={dataPost.imageUrl}
+        // user={{
+        //     avatarUrl: dataPost.user.avatarUrl,
+        //     fullName: dataPost.user.fullName,
+        // }}
+        // createdAt={new Date(dataPost.createdAt).toLocaleDateString("ru", {
+        //     year: "numeric",
+        //     month: "long",
+        //     day: "numeric",
+        // })}
+        // viewsCount={dataPost.viewsCount}
+        // commentsCount={3} // todo: Сделать комменты
+        // tags={dataPost.tags}
+        // isFullPost
       >
         <p>
           Hey there! 👋 I'm starting a new series called "Roast the Code", where
