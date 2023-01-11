@@ -28,8 +28,8 @@ export const Login = () => {
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchAuth(values));
-    if ('token' in data.payload){
-      localStorage.setItem('token', data.payload.token);
+    if ("token" in data.payload) {
+      localStorage.setItem("token", data.payload.token);
     }
   };
 
@@ -38,31 +38,33 @@ export const Login = () => {
   }
 
   return (
-    <Paper classes={{ root: styles.root }}>
-      <Typography classes={{ root: styles.title }} variant="h5">
-        Вход в аккаунт
-      </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          className={styles.field}
-          label="E-Mail"
-          error={Boolean(errors.email?.message)}
-          helperText={errors.email?.message}
-          {...register("email", { required: "Укажите почту" })}
-          fullWidth
-        />
-        <TextField
-          className={styles.field}
-          label="Пароль"
-          error={Boolean(errors.password?.message)}
-          helperText={errors.password?.message}
-          {...register("password", { required: "Укажите пароль" })}
-          fullWidth
-        />
-        <Button type="submit" size="large" variant="contained" fullWidth>
-          Войти
-        </Button>
-      </form>
-    </Paper>
+    <>
+      <Paper classes={{ root: styles.root }}>
+        <Typography classes={{ root: styles.title }} variant="h5">
+          Вход в аккаунт
+        </Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField
+            className={styles.field}
+            label="E-Mail"
+            error={Boolean(errors.email?.message)}
+            helperText={errors.email?.message}
+            {...register("email", { required: "Укажите почту" })}
+            fullWidth
+          />
+          <TextField
+            className={styles.field}
+            label="Пароль"
+            error={Boolean(errors.password?.message)}
+            helperText={errors.password?.message}
+            {...register("password", { required: "Укажите пароль" })}
+            fullWidth
+          />
+          <Button type="submit" size="large" variant="contained" fullWidth>
+            Войти
+          </Button>
+        </form>
+      </Paper>
+    </>
   );
 };
