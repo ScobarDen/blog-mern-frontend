@@ -11,7 +11,7 @@ import { UserInfo } from "../UserInfo";
 import { PostSkeleton } from "./Skeleton";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchRemovePosts } from "../../redux/slices/posts";
+import {fetchPosts, fetchRemovePosts} from "../../redux/slices/posts";
 
 export const Post = ({
   _id,
@@ -35,6 +35,7 @@ export const Post = ({
 
   const onClickRemove = () => {
     dispatch(fetchRemovePosts(_id));
+    dispatch(fetchPosts());
   };
 
   return (

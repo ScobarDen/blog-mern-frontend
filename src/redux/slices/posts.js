@@ -56,18 +56,6 @@ const postsSlice = createSlice({
       state.tags.items = [];
       state.tags.status = "error";
     })
-    builder.addCase(fetchRemovePosts.pending, (state, action) => {
-      state.posts.items = []/*state.posts.items.filter(post => post._id !== action.payload)*/;
-      state.posts.status = "loading";
-    })
-    builder.addCase(fetchRemovePosts.fulfilled, (state, action) => {
-      state.posts.items = action.payload;
-      state.posts.status = "success";
-    })
-    builder.addCase(fetchRemovePosts.rejected, (state) => {
-      state.posts.items = [];
-      state.posts.status = "error";
-    })
   },
 })
 
