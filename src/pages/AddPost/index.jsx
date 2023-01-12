@@ -39,7 +39,7 @@ export const AddPost = () => {
                 setTitle(data.title);
                 setTags(data.tags);
                 setImageUrl(data.imageUrl);
-                if (imageUrl) {
+                if (data.imageUrl) {
                     setIsImage(true);
                     setIsWebImage(true);
                 }
@@ -64,7 +64,6 @@ export const AddPost = () => {
         }
     };
 
-    console.log("url", imageUrl);
 
     const onClickRemoveImage = () => {
         setImageUrl("");
@@ -167,7 +166,7 @@ export const AddPost = () => {
             />
             <div className={styles.buttons}>
                 <Button onClick={onSubmit} size="large" variant="contained">
-                    Опубликовать
+                    {isEdit ? 'Изменить' : 'Опубликовать'}
                 </Button>
                 <Link to="/">
                     <Button size="large">Отмена</Button>

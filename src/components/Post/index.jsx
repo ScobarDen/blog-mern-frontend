@@ -34,8 +34,9 @@ export const Post = ({
   }
 
   const onClickRemove = () => {
-    dispatch(fetchRemovePosts(_id));
-    dispatch(fetchPosts());
+    dispatch(fetchRemovePosts(_id)).then(()=>{
+      dispatch(fetchPosts());
+    });
   };
 
   return (
