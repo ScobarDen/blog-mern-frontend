@@ -1,4 +1,10 @@
-import React, {useCallback, useMemo, useRef, useState} from "react";
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
@@ -8,10 +14,12 @@ import "easymde/dist/easymde.min.css";
 import styles from "./AddPost.module.scss";
 import {useSelector} from "react-redux";
 import {selectIsAuth} from "../../redux/slices/auth";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, Navigate, useNavigate, useParams} from "react-router-dom";
 import axios, {baseURL} from "../../axios";
 
 export const AddPost = () => {
+    const {id} = useParams();
+
     const navigate = useNavigate();
     const isAuth = useSelector(selectIsAuth);
     const [text, setText] = useState("");
@@ -21,6 +29,27 @@ export const AddPost = () => {
     const [imageUrl, setImageUrl] = useState("");
     const inputFileRef = useRef(null);
     const [isImage, setIsImage] = useState(false);
+    const [isWebImage, setIsWebImage] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+
+    useEffect(() => {
+        if (id) {
+            axios.get(`posts/${id}`).then(({data}) => {
+                setText(data.text);
+                setTitle(data.title);
+                setTags(data.tags);
+                setImageUrl(data.imageUrl);
+                if (imageUrl) {
+                    setIsImage(true);
+                    setIsWebImage(true);
+                }
+                setIsEdit(true);
+            }).catch(err => {
+                console.warn(err);
+                alert('Ошибка при получении статьи');
+            });
+        }
+    }, []);
 
     const handleChangeFile = async (e) => {
         try {
@@ -35,7 +64,7 @@ export const AddPost = () => {
         }
     };
 
-    console.log('url', imageUrl);
+    console.log("url", imageUrl);
 
     const onClickRemoveImage = () => {
         setImageUrl("");
@@ -52,10 +81,12 @@ export const AddPost = () => {
             const fields = {
                 title,
                 text,
-                imageUrl: isImage ? baseURL + imageUrl : '',
-                tags: tags.split(delimiters).filter(tag => tag !== ""),
+                imageUrl: isImage ? (isWebImage ? imageUrl : baseURL + imageUrl) : "",
+                tags: Array.isArray(tags)
+                    ? tags
+                    : tags.split(delimiters).filter((tag) => tag !== ""),
             };
-            const {data} = await axios.post("/posts", fields);
+            const {data} = isEdit ? await axios.patch(`/posts/${id}`, fields): await axios.post("/posts", fields);
             const {_id} = data;
             navigate(`/posts/${_id}`);
         } catch (e) {
@@ -106,7 +137,7 @@ export const AddPost = () => {
             {imageUrl && (
                 <img
                     className={styles.image}
-                    src={`http://localhost:4444${imageUrl}`}
+                    src={isWebImage ? imageUrl : baseURL + imageUrl}
                     alt="Uploaded"
                 />
             )}
