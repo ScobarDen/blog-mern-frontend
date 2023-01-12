@@ -170,7 +170,7 @@ export const AddPost = () => {
       />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          {isEdit ? "Изменить" : "Опубликовать"}
+          {isEdit ? "Сохранить" : "Опубликовать"}
         </Button>
         <Link to="/">
           <Button size="large">Отмена</Button>
