@@ -27,9 +27,14 @@ export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchAuth(values));
-    if ("token" in data.payload) {
-      localStorage.setItem("token", data.payload.token);
+    try{
+      const data = await dispatch(fetchAuth(values));
+      if ("token" in data.payload) {
+        localStorage.setItem("token", data.payload.token);
+      }
+    } catch (e) {
+      alert('Не удалось войти')
+      console.log(e);
     }
   };
 

@@ -4,11 +4,14 @@ import { Post, AddComment, CommentsBlock } from "../components";
 import { useParams } from "react-router-dom";
 import axios from "../axios";
 import ReactMarkdown from "react-markdown";
+import { useSelector } from "react-redux";
+import { selectPosts } from "../redux/slices/posts";
 
 export const FullPost = () => {
   const [dataPost, setDataPost] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+  const { comments } = useSelector(selectPosts);
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,7 +24,7 @@ export const FullPost = () => {
       .catch((err) => {
         console.warn(err);
       });
-  }, []);
+  }, [comments]);
 
   if (isLoading || !dataPost.tags) {
     return <Post isLoading={true} />;
@@ -40,31 +43,13 @@ export const FullPost = () => {
           day: "numeric",
         })}
         viewsCount={dataPost.viewsCount}
-        commentsCount={3} // todo: Сделать комменты
+        commentsCount={dataPost.commentsCount}
         tags={dataPost.tags}
         isFullPost
       >
-        <ReactMarkdown children={dataPost.text}/>
+        <ReactMarkdown children={dataPost.text} />
       </Post>
-      <CommentsBlock
-        items={[
-          {
-            user: {
-              fullName: "Вася Пупкин",
-              avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
-            },
-            text: "Это тестовый комментарий 555555",
-          },
-          {
-            user: {
-              fullName: "Иван Иванов",
-              avatarUrl: "https://mui.com/static/images/avatar/2.jpg",
-            },
-            text: "When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top",
-          },
-        ]}
-        isLoading={false}
-      >
+      <CommentsBlock items={dataPost.comments} isLoading={false}>
         <AddComment />
       </CommentsBlock>
     </>

@@ -11,6 +11,11 @@ export const fetchTags = createAsyncThunk("posts/fetchTags", async () => {
   return data;
 });
 
+export const fetchComments = createAsyncThunk("posts/fetchComments", async () => {
+  const { data } = await axios.get("/comments");
+  return data;
+});
+
 export const fetchRemovePosts = createAsyncThunk("posts/fetchRemovePosts", async (id) => {
   const { data } = await axios.delete(`/posts/${id}`);
   return data;
@@ -22,6 +27,10 @@ const initialState = {
     status: "loading,",
   },
   tags: {
+    items: [],
+    status: "loading,",
+  },
+  comments: {
     items: [],
     status: "loading,",
   },
@@ -55,6 +64,18 @@ const postsSlice = createSlice({
     builder.addCase(fetchTags.rejected, (state) => {
       state.tags.items = [];
       state.tags.status = "error";
+    })
+    builder.addCase(fetchComments.pending, (state) => {
+      state.comments.items = [];
+      state.comments.status = "loading";
+    })
+    builder.addCase(fetchComments.fulfilled, (state, action) => {
+      state.comments.items = action.payload;
+      state.comments.status = "success";
+    })
+    builder.addCase(fetchComments.rejected, (state) => {
+      state.comments.items = [];
+      state.comments.status = "error";
     })
   },
 })
