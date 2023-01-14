@@ -29,9 +29,14 @@ export const Registration = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchRegister(values));
-    if ("token" in data.payload) {
-      localStorage.setItem("token", data.payload.token);
+    try {
+      const data = await dispatch(fetchRegister(values));
+      if ("token" in data.payload) {
+        localStorage.setItem("token", data.payload.token);
+      }
+    } catch (err) {
+      console.log(err);
+      alert('Не удалось зарегестрироваться')
     }
   };
 
@@ -73,7 +78,13 @@ export const Registration = () => {
           {...register("password", { required: "Укажите пароль" })}
           fullWidth
         />
-        <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+        <Button
+          disabled={!isValid}
+          type="submit"
+          size="large"
+          variant="contained"
+          fullWidth
+        >
           Зарегистрироваться
         </Button>
       </form>
