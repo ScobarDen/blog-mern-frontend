@@ -30,7 +30,7 @@ export const AddComment = () => {
   const handleComment = async (text) => {
     try {
       await axios.post(`/comments/${id}`, {
-        "text": text.text
+        text: text.text,
       });
       await dispatch(fetchComments());
     } catch (err) {
@@ -38,6 +38,9 @@ export const AddComment = () => {
       alert("Не удалось оставить комментарий");
     }
   };
+  if (!person) {
+    return;
+  }
   return (
     <>
       <div className={styles.root}>
