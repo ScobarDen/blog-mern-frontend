@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const baseURL = process.env.REACT_APP_API_URL || "http://localhost:4444";
+export const baseURL =
+  process.env.REACT_APP_API_URL ||
+  "https://mern-blog-backend-htd8.onrender.com";
 
 const instance = axios.create({
   baseURL,
