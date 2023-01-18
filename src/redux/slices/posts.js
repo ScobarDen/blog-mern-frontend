@@ -14,6 +14,23 @@ export const fetchPostsByTag = createAsyncThunk(
   }
 );
 
+export const fetchPostsByCategory = createAsyncThunk(
+  "posts/fetchPostsByCategory",
+  async (index) => {
+    const { data } = await axios.get("/posts");
+    const categories = ["createdAt", "viewsCount"];
+    return data.sort((post2, post1) => {
+      if (index === 0) {
+        return (
+          new Date(post1[categories[index]]).getTime() -
+          new Date(post2[[categories[index]]]).getTime()
+        );
+      }
+      return post1[categories[index]] - post2[[categories[index]]];
+    });
+  }
+);
+
 export const fetchTags = createAsyncThunk("posts/fetchTags", async () => {
   const { data } = await axios.get("/tags");
   return data;
@@ -77,6 +94,19 @@ const postsSlice = createSlice({
       state.posts.status = "success";
     });
     builder.addCase(fetchPostsByTag.rejected, (state) => {
+      state.posts.items = [];
+      state.posts.status = "error";
+    });
+
+    builder.addCase(fetchPostsByCategory.pending, (state) => {
+      state.posts.items = [];
+      state.posts.status = "loading";
+    });
+    builder.addCase(fetchPostsByCategory.fulfilled, (state, action) => {
+      state.posts.items = action.payload;
+      state.posts.status = "success";
+    });
+    builder.addCase(fetchPostsByCategory.rejected, (state) => {
       state.posts.items = [];
       state.posts.status = "error";
     });
