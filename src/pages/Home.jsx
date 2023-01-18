@@ -9,7 +9,6 @@ import { CommentsBlock } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchComments,
-  fetchPosts,
   fetchPostsByCategory,
   fetchTags,
   selectPosts,
