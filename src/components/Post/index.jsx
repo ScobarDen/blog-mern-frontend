@@ -11,7 +11,11 @@ import { UserInfo } from "../UserInfo";
 import { PostSkeleton } from "./Skeleton";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchPosts, fetchRemovePosts } from "../../redux/slices/posts";
+import {
+  fetchPosts,
+  fetchPostsByTag,
+  fetchRemovePosts,
+} from "../../redux/slices/posts";
 
 export const Post = ({
   _id,
@@ -37,6 +41,11 @@ export const Post = ({
     dispatch(fetchRemovePosts(_id)).then(() => {
       dispatch(fetchPosts());
     });
+  };
+
+  const handleClick = (e, tag) => {
+    e.preventDefault();
+    dispatch(fetchPostsByTag(tag));
   };
 
   return (
@@ -71,7 +80,7 @@ export const Post = ({
           <ul className={styles.tags}>
             {tags.map((name) => (
               <li key={name}>
-                <Link to={`/tag/${name}`}>#{name}</Link>
+                <a onClick={(e) => handleClick(e, name)}>#{name}</a>
               </li>
             ))}
           </ul>
