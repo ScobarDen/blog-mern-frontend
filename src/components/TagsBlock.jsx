@@ -25,6 +25,7 @@ export const TagsBlock = ({ items, isLoading = true }) => {
           <a
             style={{ textDecoration: "none", color: "black" }}
             onClick={(e) => handleClick(e, name)}
+            key={i}
           >
             <ListItem key={i} disablePadding>
               <ListItemButton>
