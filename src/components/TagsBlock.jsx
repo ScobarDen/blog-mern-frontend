@@ -20,16 +20,18 @@ export const TagsBlock = ({ items, isLoading = true }) => {
   };
   return (
     <SideBlock title="Тэги">
-      <List>
+      <List
+        style={{
+          textDecoration: "none",
+          color: "var(--text-color)",
+          backgroundColor: "var(--background-color-secondary)",
+        }}
+      >
         {(isLoading ? [...Array(5)] : items).map((name, i) => (
-          <a
-            style={{ textDecoration: "none", color: "black" }}
-            onClick={(e) => handleClick(e, name)}
-            key={i}
-          >
+          <a onClick={(e) => handleClick(e, name)} key={i}>
             <ListItem key={i} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
+                <ListItemIcon style={{ color: "var(--text-color)" }}>
                   <TagIcon />
                 </ListItemIcon>
                 {isLoading ? (

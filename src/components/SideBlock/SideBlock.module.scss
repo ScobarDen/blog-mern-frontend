@@ -1,7 +1,13 @@
 .root {
   margin-bottom: 20px;
+  color: var(--text-color);
+  background-color: var(--background-color-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
 }
 
 .title {
   padding: 15px 15px 0 15px;
+  color: var(--text-color);
+  background-color: var(--background-color-secondary);
 }

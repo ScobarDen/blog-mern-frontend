@@ -12,7 +12,12 @@ import Skeleton from "@mui/material/Skeleton";
 export const CommentsBlock = ({ items, children, isLoading = true }) => {
   return (
     <SideBlock title="Комментарии">
-      <List>
+      <List
+        style={{
+          color: "var(--text-color)",
+          backgroundColor: "var(--background-color-secondary)",
+        }}
+      >
         {(isLoading ? [...Array(5)] : items).map((obj, index) => (
           <React.Fragment key={index}>
             <ListItem alignItems="flex-start">

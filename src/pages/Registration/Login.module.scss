@@ -1,7 +1,9 @@
 .root {
   width: 400px;
   padding: 50px;
-  border: 1px solid #dedede;
+  color: var(--text-color);
+  background-color: var(--background-color-secondary) !important;
+  border: 1px solid var(--border-color);
   margin: 50px auto;
 }
 

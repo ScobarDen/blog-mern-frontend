@@ -1,16 +1,16 @@
-$blue: #4361ee;
+
 
 .root {
-  background-color: #fff;
-  border: 1px solid #dedede;
+  background-color: var(--background-color-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 15px;
   position: relative;
 
   &:hover {
-    border: 1px solid $blue;
-    box-shadow: 0 0 0 1px $blue;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-color);
 
     .editButtons {
       opacity: 1;
@@ -19,8 +19,8 @@ $blue: #4361ee;
 
   &Full {
     &:hover {
-      background-color: #fff;
-      border: 1px solid #dedede;
+      background-color: var(--background-color-secondary);
+      border: 1px solid var(--border-color);
       box-shadow: none;
     }
   }
@@ -60,10 +60,10 @@ $blue: #4361ee;
 
   a {
     text-decoration: none;
-    color: #000;
+    color: var(--text-color);
 
     &:hover {
-      color: $blue;
+      color: var(--primary-color);
     }
   }
 
@@ -90,7 +90,7 @@ $blue: #4361ee;
 
     a {
       text-decoration: none;
-      color: #000;
+      color: var(--text-color);
     }
   }
 }
@@ -115,8 +115,8 @@ $blue: #4361ee;
 }
 
 .skeleton {
-  background-color: #fff;
-  border: 1px solid #dedede;
+  background-color: var(--background-color-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 15px;
@@ -151,7 +151,7 @@ $blue: #4361ee;
   position: absolute;
   right: 15px;
   top: 15px;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: var(--background-color-primary);
   border-radius: 10px;
   opacity: 0;
   transition: all 0.15s ease-in-out;
