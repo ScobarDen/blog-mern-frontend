@@ -41,14 +41,13 @@ export const Home = () => {
   };
   const [currentPagePosts, pagination, returnToFirstPage] = usePagination(
     postsItems,
-    2
+    3
   );
   useEffect(() => {
     if (!currentPagePosts.length) {
       returnToFirstPage();
     }
   }, [currentPagePosts]);
-  console.log(currentPagePosts);
   return (
     <>
       <Tabs
