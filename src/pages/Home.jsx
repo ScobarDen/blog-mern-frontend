@@ -14,6 +14,8 @@ import {
   selectPosts,
 } from "../redux/slices/posts";
 import { selectAuth } from "../redux/slices/auth";
+import usePagination from "../hooks/usePagination";
+import { Box } from "@mui/material";
 
 export const Home = () => {
   const [categoriesIndex, setCategoriesIndex] = useState(0);
@@ -37,7 +39,16 @@ export const Home = () => {
     setCategoriesIndex(newValue);
     dispatch(fetchPostsByCategory(newValue));
   };
-
+  const [currentPagePosts, pagination, returnToFirstPage] = usePagination(
+    postsItems,
+    2
+  );
+  useEffect(() => {
+    if (!currentPagePosts.length) {
+      returnToFirstPage();
+    }
+  }, [currentPagePosts]);
+  console.log(currentPagePosts);
   return (
     <>
       <Tabs
@@ -50,32 +61,48 @@ export const Home = () => {
         <Tab label="Популярные" />
       </Tabs>
       <Grid container spacing={4}>
-        <Grid xs={8} item>
-          {(isLoadingPosts ? [...Array(5)] : postsItems).map((post, index) =>
-            isLoadingPosts ? (
-              <Post isLoading={true} key={index} />
-            ) : (
-              <Post
-                key={post._id}
-                _id={post._id}
-                title={post.title}
-                imageUrl={post.imageUrl}
-                user={{
-                  avatarUrl: post.user.avatarUrl,
-                  fullName: post.user.fullName,
-                }}
-                createdAt={new Date(post.createdAt).toLocaleDateString("ru", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-                viewsCount={post.viewsCount}
-                commentsCount={post.commentsCount}
-                tags={post.tags}
-                isEditable={data?._id === post.user._id}
-              />
-            )
-          )}
+        <Grid
+          xs={8}
+          item
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box>
+            {(isLoadingPosts ? [...Array(5)] : currentPagePosts).map(
+              (post, index) =>
+                isLoadingPosts ? (
+                  <Post isLoading={true} key={index} />
+                ) : (
+                  <Post
+                    key={post._id}
+                    _id={post._id}
+                    title={post.title}
+                    imageUrl={post.imageUrl}
+                    user={{
+                      avatarUrl: post.user.avatarUrl,
+                      fullName: post.user.fullName,
+                    }}
+                    createdAt={new Date(post.createdAt).toLocaleDateString(
+                      "ru",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }
+                    )}
+                    viewsCount={post.viewsCount}
+                    commentsCount={post.commentsCount}
+                    tags={post.tags}
+                    isEditable={data?._id === post.user._id}
+                  />
+                )
+            )}
+          </Box>
+
+          {pagination}
         </Grid>
         <Grid xs={4} item>
           <TagsBlock items={tagsItems} isLoading={isLoadingTags} />

@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectIsAuth } from "../../redux/slices/auth";
+import { fetchPosts } from "../../redux/slices/posts";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -13,14 +14,18 @@ export const Header = () => {
 
   const onClickLogout = () => {
     dispatch(logout());
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   };
 
   return (
     <div className={styles.root}>
       <Container maxWidth="lg">
         <div className={styles.inner}>
-          <Link className={styles.logo} to="/">
+          <Link
+            className={styles.logo}
+            onClick={() => dispatch(fetchPosts())}
+            to="/"
+          >
             <div>Scobar's BLOG</div>
           </Link>
           <div className={styles.buttons}>
