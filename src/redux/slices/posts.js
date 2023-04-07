@@ -141,4 +141,8 @@ const postsSlice = createSlice({
 
 export const selectPosts = (state) => state.posts;
 
+export const selectAuthPosts = (state) =>
+  state.posts.posts.items.filter((post) => post.user._id === state.auth.data._id);
+
+
 export default postsSlice.reducer;
