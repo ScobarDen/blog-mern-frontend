@@ -17,8 +17,7 @@ import { selectAuth } from "../redux/slices/auth";
 import usePagination from "../hooks/usePagination";
 import { Box } from "@mui/material";
 
-export const Home = () => {
-  const [categoriesIndex, setCategoriesIndex] = useState(0);
+export const Home = ({ categoriesIndex, setCategoriesIndex }) => {
   const dispatch = useDispatch();
   const {
     posts: { items: postsItems, status: postsStatus },

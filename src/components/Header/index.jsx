@@ -6,12 +6,12 @@ import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectAuth, selectIsAuth } from "../../redux/slices/auth";
-import { fetchPosts } from "../../redux/slices/posts";
+import { fetchPostsByCategory } from "../../redux/slices/posts";
 import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/material";
 import StyledBadge from "../common/HOC/StyledBadge";
 
-export const Header = () => {
+export const Header = ({ categoriesIndex, setCategoriesIndex }) => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
   const { data: currentUser } = useSelector(selectAuth);
@@ -27,7 +27,10 @@ export const Header = () => {
         <div className={styles.inner}>
           <Link
             className={styles.logo}
-            onClick={() => dispatch(fetchPosts())}
+            onClick={() => {
+              dispatch(fetchPostsByCategory(0));
+              setCategoriesIndex(0);
+            }}
             to="/"
           >
             <Box
