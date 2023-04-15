@@ -1,29 +1,23 @@
 import axios from "../../axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchAuth = createAsyncThunk(
-  "posts/fetchAuth",
-  async (params) => {
-    const { data } = await axios.post("/auth/login", params);
-    return data;
-  }
-);
+export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params) => {
+  const { data } = await axios.post("/auth/login", params);
+  return data;
+});
 
 export const fetchRegister = createAsyncThunk(
-  "posts/fetchRegister",
+  "auth/fetchRegister",
   async (params) => {
     const { data } = await axios.post("/auth/register", params);
     return data;
   }
 );
 
-export const fetchAuthMe = createAsyncThunk(
-    "posts/fetchAuthMe",
-    async () => {
-      const { data } = await axios.get("/auth/me");
-      return data;
-    }
-);
+export const fetchAuthMe = createAsyncThunk("auth/fetchAuthMe", async () => {
+  const { data } = await axios.get("/auth/me");
+  return data;
+});
 
 const initialState = {
   data: null,
@@ -82,6 +76,7 @@ export const { logout } = authSlice.actions;
 
 export const selectAuth = (state) => state.auth;
 export const selectIsAuth = (state) => Boolean(state.auth.data);
-export const selectIsAuthLoaded = (state) => Boolean(state.auth.status === "success");
+export const selectIsAuthLoaded = (state) =>
+  Boolean(state.auth.status === "success");
 
 export default authSlice.reducer;

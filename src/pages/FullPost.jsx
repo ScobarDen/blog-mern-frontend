@@ -6,12 +6,14 @@ import axios from "../axios";
 import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
 import { selectPosts } from "../redux/slices/posts";
+import { selectIsAuth } from "../redux/slices/auth";
 
 export const FullPost = () => {
   const [dataPost, setDataPost] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const { comments } = useSelector(selectPosts);
+  const isCurrentUser = useSelector(selectIsAuth);
 
   useEffect(() => {
     setIsLoading(true);
@@ -49,11 +51,9 @@ export const FullPost = () => {
       >
         <ReactMarkdown children={dataPost.text} />
       </Post>
-      {dataPost.comments.length !== 0 && (
-        <CommentsBlock items={dataPost.comments} isLoading={false}>
-          <AddComment />
-        </CommentsBlock>
-      )}
+      <CommentsBlock items={dataPost.comments} isLoading={false}>
+        <AddComment />
+      </CommentsBlock>
     </>
   );
 };
