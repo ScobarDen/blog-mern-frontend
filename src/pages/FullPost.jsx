@@ -49,9 +49,11 @@ export const FullPost = () => {
       >
         <ReactMarkdown children={dataPost.text} />
       </Post>
-      <CommentsBlock items={dataPost.comments} isLoading={false}>
-        <AddComment />
-      </CommentsBlock>
+      {dataPost.comments.length !== 0 && (
+        <CommentsBlock items={dataPost.comments} isLoading={false}>
+          <AddComment />
+        </CommentsBlock>
+      )}
     </>
   );
 };
