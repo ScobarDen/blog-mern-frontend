@@ -4,12 +4,31 @@ import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRegister, selectIsAuth } from "../../redux/slices/auth";
 import { Navigate } from "react-router-dom";
+
+const schema = yup
+  .object({
+    fullName: yup
+      .string()
+      .required("Это поле обязательно для заполнения")
+      .min(3, "Имя должно быть больше 2 символов"),
+    email: yup
+      .string()
+      .required("Это поле обязательно для заполнения")
+      .email("Некорректный email"),
+    password: yup
+      .string()
+      .required("Это поле обязательно для заполнения")
+      .min(5, "Пароль должно быть больше 8 символов"),
+  })
+  .required();
 
 export const Registration = () => {
   const {
@@ -24,6 +43,7 @@ export const Registration = () => {
       password: "",
     },
     mode: "onChange",
+    resolver: yupResolver(schema),
   });
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
@@ -36,7 +56,7 @@ export const Registration = () => {
       }
     } catch (err) {
       console.log(err);
-      alert('Не удалось зарегестрироваться')
+      alert("Не удалось зарегестрироваться");
     }
   };
 
@@ -58,7 +78,7 @@ export const Registration = () => {
           label="Полное имя"
           error={Boolean(errors.fullName?.message)}
           helperText={errors.fullName?.message}
-          {...register("fullName", { required: "Укажите полное имя" })}
+          {...register("fullName")}
           fullWidth
         />
         <TextField
@@ -66,7 +86,7 @@ export const Registration = () => {
           label="E-Mail"
           error={Boolean(errors.email?.message)}
           helperText={errors.email?.message}
-          {...register("email", { required: "Укажите почту" })}
+          {...register("email")}
           fullWidth
         />
         <TextField
@@ -75,7 +95,7 @@ export const Registration = () => {
           type="password"
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
-          {...register("password", { required: "Укажите пароль" })}
+          {...register("password")}
           fullWidth
         />
         <Button
