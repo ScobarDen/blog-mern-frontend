@@ -1,9 +1,12 @@
-# Blog app MERN
+# Blog MERN
 
-- M - MongoDB 
-- E - ExpressJS 
-- R - ReactJS 
-- N - NodeJS
+## Client
+Здесь находится фронтенд часть проекта
+Стэк: `react`, `redux`, `bootstrap`
 
-#### Frontend for fullstack MERN app.
-Deploy on [render.com](https://mern-blog-frontend-g4h3.onrender.com/).
+## Server
+Здесь находится бэкенд часть проекта
+Стэк: `nodeJS`, `expressJS`, `mongoDB`
+
+## Dockerfile
+Dockerfile для создания docker контейнеров
