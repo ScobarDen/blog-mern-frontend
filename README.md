@@ -2,7 +2,7 @@
 
 ## Client
 Здесь находится фронтенд часть проекта
-Стэк: `react`, `redux`, `bootstrap`
+Стэк: `react`, `redux`, `materialUI`
 
 ## Server
 Здесь находится бэкенд часть проекта
