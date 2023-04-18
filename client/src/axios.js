@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const baseURL =
   process.env.REACT_APP_API_URL ||
- // "https://mern-blog-backend-htd8.onrender.com" ||
-  "http://localhost:4444/";
+  // "http://localhost:4444/" ||
+  "https://scobars-blog.onrender.com";
 
 const instance = axios.create({
   baseURL,
