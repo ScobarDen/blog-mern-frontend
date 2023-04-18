@@ -1,0 +1,133 @@
+[{
+  "_id": {
+    "$oid": "643bf021736e2279994870c8"
+  },
+  "text": "Это моя статья",
+  "user": {
+    "$oid": "643befad736e2279994870b2"
+  },
+  "post": {
+    "$oid": "643bf011736e2279994870bc"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681649697779"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681649697779"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643bf428d98c530eb2b7c509"
+  },
+  "text": "я написал",
+  "user": {
+    "$oid": "643befad736e2279994870b2"
+  },
+  "post": {
+    "$oid": "643bf3fad98c530eb2b7c4f9"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681650728904"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681650728904"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e77789f8df08a24964584"
+  },
+  "text": "очень интересно",
+  "user": {
+    "$oid": "643e74fd9f8df08a24964535"
+  },
+  "post": {
+    "$oid": "643bf3fad98c530eb2b7c4f9"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681815416289"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681815416289"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e79d69f8df08a249645af"
+  },
+  "text": "Статья с хабра",
+  "user": {
+    "$oid": "643e74fd9f8df08a24964535"
+  },
+  "post": {
+    "$oid": "643e79769f8df08a2496459d"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681816022185"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681816022185"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e7c139f8df08a249645dc"
+  },
+  "text": "Советую всем к прочтению",
+  "user": {
+    "$oid": "643e74fd9f8df08a24964535"
+  },
+  "post": {
+    "$oid": "643e7bec9f8df08a249645c6"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681816595890"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681816595890"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e7c8a9f8df08a2496465e"
+  },
+  "text": "Хорошая статья",
+  "user": {
+    "$oid": "643befad736e2279994870b2"
+  },
+  "post": {
+    "$oid": "643e7bec9f8df08a249645c6"
+  },
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681816714941"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681816714941"
+    }
+  },
+  "__v": 0
+}]

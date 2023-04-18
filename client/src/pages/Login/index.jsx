@@ -18,8 +18,8 @@ export const Login = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: "test@gmail.com",
-      password: "test123",
+      email: "",
+      password: "",
     },
     mode: "onSubmit",
   });
@@ -27,13 +27,13 @@ export const Login = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = async (values) => {
-    try{
+    try {
       const data = await dispatch(fetchAuth(values));
       if ("token" in data.payload) {
         localStorage.setItem("token", data.payload.token);
       }
     } catch (e) {
-      alert('Не удалось войти')
+      alert("Не удалось войти");
       console.log(e);
     }
   };
@@ -66,7 +66,13 @@ export const Login = () => {
             {...register("password", { required: "Укажите пароль" })}
             fullWidth
           />
-          <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+          <Button
+            disabled={!isValid}
+            type="submit"
+            size="large"
+            variant="contained"
+            fullWidth
+          >
             Войти
           </Button>
         </form>

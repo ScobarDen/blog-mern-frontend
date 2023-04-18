@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "643befad736e2279994870b2"
+  },
+  "fullName": "Андрей Смирнов",
+  "email": "smirnov@mail.ru",
+  "passwordHash": "$2b$10$jrCwHNfKhssxInlalOluuOZxwPiXzO4K5PErjU4Wf3IPEz0spw/Vm",
+  "avatarUrl": "https://avatars.dicebear.com/api/avataaars/5wl8.svg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681649581280"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681649581280"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643e74fd9f8df08a24964535"
+  },
+  "fullName": "Денис Гущин",
+  "email": "gdv-ps@mail.ru",
+  "passwordHash": "$2b$10$jI7FX/sT8PFzBynQQXKnle.G9GM6kdXnoaxMtVVftSggOmVXtFOGy",
+  "avatarUrl": "https://avatars.dicebear.com/api/avataaars/yxes.svg",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1681814781009"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1681814781009"
+    }
+  },
+  "__v": 0
+}]
