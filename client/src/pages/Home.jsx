@@ -60,7 +60,8 @@ export const Home = ({ categoriesIndex, setCategoriesIndex }) => {
       </Tabs>
       <Grid container spacing={4}>
         <Grid
-          xs={8}
+          xs={12}
+          md={8}
           item
           sx={{
             display: "flex",
@@ -102,7 +103,14 @@ export const Home = ({ categoriesIndex, setCategoriesIndex }) => {
 
           {pagination}
         </Grid>
-        <Grid xs={4} item>
+        <Grid
+          xs={0}
+          md={4}
+          item
+          sx={{
+            display: { xs: "none", md: "block" },
+          }}
+        >
           <TagsBlock items={tagsItems} isLoading={isLoadingTags} />
           <CommentsBlock items={commentsItems} isLoading={isLoadingComments} />
         </Grid>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 
 import styles from "./Header.module.scss";
@@ -16,6 +16,19 @@ export const Header = ({ categoriesIndex, setCategoriesIndex }) => {
   const isAuth = useSelector(selectIsAuth);
   const { data: currentUser } = useSelector(selectAuth);
 
+  const [clientWidth, setClientWidth] = useState(
+    document.documentElement.clientWidth
+  );
+
+  useEffect(() => {
+    function handleResize() {
+      setClientWidth(document.documentElement.clientWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const onClickLogout = () => {
     dispatch(logout());
     localStorage.removeItem("token");
@@ -23,7 +36,7 @@ export const Header = ({ categoriesIndex, setCategoriesIndex }) => {
 
   return (
     <div className={styles.root}>
-      <Container maxWidth="lg">
+      <Container sx={{ maxWidth: { xs: "xs", sm: "sm", md: "md", lg: "lg" } }}>
         <div className={styles.inner}>
           <Link
             className={styles.logo}
@@ -41,7 +54,7 @@ export const Header = ({ categoriesIndex, setCategoriesIndex }) => {
                 height: "100%",
               }}
             >
-              <span>Scobar's BLOG</span>
+              <span>{clientWidth > 550 ? "Scobar's BLOG" : "SB"}</span>
             </Box>
           </Link>
           <div className={styles.buttons}>

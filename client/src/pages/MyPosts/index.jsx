@@ -40,11 +40,11 @@ export const MyPosts = () => {
           : currentUserPosts
         ).map((post, index) =>
           isLoadingPosts ? (
-            <Grid item xs={6} key={index}>
+            <Grid item xs={12} md={6} key={index}>
               <Post isLoading={true} />
             </Grid>
           ) : (
-            <Grid item xs={6} key={post._id}>
+            <Grid item xs={12} md={6} key={post._id}>
               <Post
                 _id={post._id}
                 title={post.title}

@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <Header {...{ categoriesIndex, setCategoriesIndex }} />
-      <Container maxWidth="lg">
+      <Container sx={{ maxWidth: { xs: "xs", sm: "sm", md: "md", lg: "lg" } }}>
         <Routes>
           <Route
             path="/"
