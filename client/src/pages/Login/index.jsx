@@ -44,7 +44,10 @@ export const Login = () => {
 
   return (
     <>
-      <Paper classes={{ root: styles.root }}>
+      <Paper
+        classes={{ root: styles.root }}
+        sx={{ maxWidth: { xs: "300px", sm: "sm" } }}
+      >
         <Typography classes={{ root: styles.title }} variant="h5">
           Вход в аккаунт
         </Typography>
